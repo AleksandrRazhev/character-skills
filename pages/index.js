@@ -1,5 +1,8 @@
+import { Provider } from "react-redux";
+
+import { store } from "../store";
 import Head from "next/head";
-import App from "../components/App";
+import App from "../components/App/App";
 
 import styles from "../styles/Home.module.css";
 
@@ -16,7 +19,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </main>
     </div>
   );
