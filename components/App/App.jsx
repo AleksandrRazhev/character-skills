@@ -10,7 +10,15 @@ const App = () => {
 
   return (
     <div className={style.app}>
-      <button className={style.button}>Добавить персонажа</button>
+      <form className={style.form}>
+        <label className={style.label}>
+          Введите имя персонажа
+          <input id="name" type="text" />
+        </label>
+        <button type="button" className={style.button}>
+          Добавить персонажа
+        </button>
+      </form>
       <button
         className={style.button}
         onClick={() => dispatch(removeCharacter())}
