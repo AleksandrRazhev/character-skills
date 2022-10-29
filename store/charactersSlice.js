@@ -12,7 +12,19 @@ const charactersSlice = createSlice({
       },
     ],
   },
-  reducers: {},
+  reducers: {
+    addCharacter(state, action) {
+      state.characters.push(action.payload);
+    },
+    removeCharacter(state, action) {
+      if (action.payload !== 0 && !action.payload) {
+        state.characters.pop();
+      } else {
+        state.characters.splice(action.payload, 1);
+      }
+    },
+  },
 });
 
 export default charactersSlice.reducer;
+export const { addCharacter, removeCharacter } = charactersSlice.actions;
