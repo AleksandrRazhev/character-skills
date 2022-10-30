@@ -1,21 +1,17 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { addCharacter } from "../../store/charactersSlice";
+import { addSkill } from "../../store/newCharacterSlice";
+
 import style from "./NewChart.module.css";
 
 const NewChart = () => {
   const characters = useSelector((state) => state.characters.characters);
   const skills = useSelector((state) => state.skills.skills);
+  const newCharacter = useSelector((state) => state.newCharacter);
   const dispatch = useDispatch();
 
-  const skillsObj = (skills) =>
-    skills.reduce((acc, item) => {
-      return { ...acc, [item]: 0 };
-    }, {});
-
-  const [nameState, setNameState] = useState("");
-  const [skillsState, setSkillState] = useState(skillsObj(skills));
-  const skillsEntries = Object.entries(skillsState);
+  console.log("new Char", newCharacter);
 
   const onAddCharacter = () => {
     const caracter = {
@@ -25,20 +21,20 @@ const NewChart = () => {
     dispatch(addCharacter(caracter));
   };
 
-  const onSetSkill = (characteristic) => {
-    const skill = skillsEntries[0][0];
-    const value = skillsEntries[0][1];
+  const onSetSkill = (data) => {
+    const entries = Object.entries(data);
+    const skill = entries[0][0];
+    const value = entries[0][1];
     if ((!skill && skill !== 0) || (!value && value !== 0)) {
       return;
     }
-    console.log(skill);
-    console.log(value);
+    dispatch(addSkill(data));
   };
 
   return (
     <form className={style.form}>
-      <p>{nameState}</p>
-      {skillsEntries.map((item) => (
+      <p>{newCharacter.name}</p>
+      {Object.entries(newCharacter.skills).map((item) => (
         <p key={item[0]}>
           {item[0]}: {item[1]}
         </p>
@@ -57,7 +53,7 @@ const NewChart = () => {
           <input
             id={item}
             type="text"
-            onChange={(e) => onSetSkill({ power: Number(e.target.value) })}
+            onChange={(e) => onSetSkill({ [item]: Number(e.target.value) })}
           />
         </label>
       ))}
