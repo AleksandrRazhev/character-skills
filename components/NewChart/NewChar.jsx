@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addCharacter } from "../../store/charactersSlice";
@@ -6,6 +6,7 @@ import {
   addSkill,
   addName,
   resetnewCharacter,
+  addSkills,
 } from "../../store/newCharacterSlice";
 
 import style from "./NewChart.module.css";
@@ -13,8 +14,13 @@ import style from "./NewChart.module.css";
 const NewChart = () => {
   const characters = useSelector((state) => state.characters.characters);
   const skills = useSelector((state) => state.skills.skills);
-  const newCharacter = useSelector((state) => state.newCharacter);
+  const newCharacter = useSelector((state) => state.newCharacter.newCharacter);
   const dispatch = useDispatch();
+  console.log(newCharacter);
+
+  useEffect(() => {
+    dispatch(addSkills(addSkills(skills)));
+  }, [newCharacter]);
 
   const onAddCharacter = (obj) => {
     const char = { name: obj.name, skills: {} };
@@ -31,10 +37,6 @@ const NewChart = () => {
     dispatch(resetnewCharacter());
   };
 
-  console.log("render");
-
-  console.log(newCharacter.skills.dexterity);
-
   const onSetSkill = (data) => {
     const entries = Object.entries(data);
     const skill = entries[0][0];
@@ -44,6 +46,10 @@ const NewChart = () => {
     }
     dispatch(addSkill(data));
   };
+
+  const newCharSkills = Object.entries(newCharacter.skills);
+
+  console.log(Object.entries(newCharacter.skills)[0]);
 
   return (
     <form className={style.form}>
@@ -62,16 +68,20 @@ const NewChart = () => {
           onChange={(e) => dispatch(addName(e.target.value))}
         />
       </label>
-      {skills.map((item) => (
-        <label key={item} className={style.label}>
-          {item}
-          <input
-            id={item}
-            type="text"
-            onChange={(e) => onSetSkill({ [item]: Number(e.target.value) })}
-          />
-        </label>
-      ))}
+      {newCharSkills[0]
+        ? newCharSkills.map((item) => (
+            <label key={item[0]} className={style.label}>
+              {item[0]}
+              <input
+                id={item[0]}
+                type="text"
+                onChange={(e) =>
+                  onSetSkill({ [item[0]]: Number(e.target.value) })
+                }
+              />
+            </label>
+          ))
+        : null}
       <button
         type="button"
         className="button"
