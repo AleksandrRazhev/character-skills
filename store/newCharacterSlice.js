@@ -13,11 +13,10 @@ const newCharacterSlice = createSlice({
     addSkill(state, action) {
       const skill = Object.keys(action.payload)[0];
       const value = Object.values(action.payload)[0];
-      console.log(skill, value);
       state.skills[skill] = value;
     },
     resetnewCharacter(state) {
-      state = initialState;
+      state = { name: "", skills: {} };
     },
   },
 });

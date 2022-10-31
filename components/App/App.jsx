@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { addCharacter, removeCharacter } from "../../store/charactersSlice";
-import NewChart from "../NewChart/NewChart";
+import NewChart from "../NewChart/NewChar";
 
 import style from "./App.module.css";
 

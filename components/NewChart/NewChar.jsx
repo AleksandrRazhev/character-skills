@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addCharacter } from "../../store/charactersSlice";
-import { addSkill } from "../../store/newCharacterSlice";
+import {
+  addSkill,
+  addName,
+  resetnewCharacter,
+} from "../../store/newCharacterSlice";
 
 import style from "./NewChart.module.css";
 
@@ -11,15 +16,22 @@ const NewChart = () => {
   const newCharacter = useSelector((state) => state.newCharacter);
   const dispatch = useDispatch();
 
-  console.log("new Char", newCharacter);
+  const onAddCharacter = (obj) => {
+    const char = { name: obj.name, skills: {} };
+    if (!obj.name) return;
+    const ID = characters[characters.length - 1].id + 1;
+    char.id = ID;
 
-  const onAddCharacter = () => {
-    const caracter = {
-      id: characters[characters.length - 1].id + 1,
-      name: nameState,
-    };
-    dispatch(addCharacter(caracter));
+    for (let key in obj.skills) {
+      if (obj.skills[key]) {
+        char.skills[key] = obj.skills[key];
+      }
+    }
+    dispatch(addCharacter(char));
+    dispatch(resetnewCharacter());
   };
+
+  console.log(newCharacter);
 
   const onSetSkill = (data) => {
     const entries = Object.entries(data);
@@ -44,7 +56,7 @@ const NewChart = () => {
         <input
           id="name"
           type="text"
-          onChange={(e) => setNameState(e.target.value)}
+          onChange={(e) => dispatch(addName(e.target.value))}
         />
       </label>
       {skills.map((item) => (
@@ -57,7 +69,11 @@ const NewChart = () => {
           />
         </label>
       ))}
-      <button type="button" className="button" onClick={() => onAddCharacter()}>
+      <button
+        type="button"
+        className="button"
+        onClick={() => onAddCharacter(newCharacter)}
+      >
         Добавить персонажа
       </button>
     </form>
