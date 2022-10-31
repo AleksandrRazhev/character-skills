@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addCharacter } from "../../store/charactersSlice";
@@ -31,7 +31,9 @@ const NewChart = () => {
     dispatch(resetnewCharacter());
   };
 
-  console.log(newCharacter);
+  console.log("render");
+
+  console.log(newCharacter.skills.dexterity);
 
   const onSetSkill = (data) => {
     const entries = Object.entries(data);
@@ -56,6 +58,7 @@ const NewChart = () => {
         <input
           id="name"
           type="text"
+          value={newCharacter.name}
           onChange={(e) => dispatch(addName(e.target.value))}
         />
       </label>

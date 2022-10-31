@@ -16,7 +16,8 @@ const newCharacterSlice = createSlice({
       state.skills[skill] = value;
     },
     resetnewCharacter(state) {
-      state = { name: "", skills: {} };
+      state.name = "";
+      state.skills = {};
     },
   },
 });
