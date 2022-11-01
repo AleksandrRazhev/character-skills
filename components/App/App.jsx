@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { addCharacter, removeCharacter } from "../../store/charactersSlice";
-import NewChart from "../NewChart/NewChar";
+import Character from "../Character/Character";
+import NewChar from "../NewChart/NewChar";
 
 import style from "./App.module.css";
 
@@ -11,21 +12,13 @@ const App = () => {
 
   return (
     <div className={style.app}>
-      <NewChart />
+      <NewChar />
       <button className="button" onClick={() => dispatch(removeCharacter())}>
         Удалить последнего персонажа
       </button>
       <ul className={style.list}>
         {characters.map((item, index) => (
-          <li key={item.id} className={style.itemList}>
-            <p>Имя: {item.name}</p>
-            <button
-              className="button"
-              onClick={() => dispatch(removeCharacter(index))}
-            >
-              Удалить
-            </button>
-          </li>
+          <Character key={item.id} name={item.name} index={index} />
         ))}
       </ul>
     </div>

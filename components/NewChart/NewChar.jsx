@@ -9,18 +9,17 @@ import {
   addSkills,
 } from "../../store/newCharacterSlice";
 
-import style from "./NewChart.module.css";
+import style from "./NewChar.module.css";
 
-const NewChart = () => {
+const NewChar = () => {
   const characters = useSelector((state) => state.characters.characters);
   const skills = useSelector((state) => state.skills.skills);
   const newCharacter = useSelector((state) => state.newCharacter.newCharacter);
   const dispatch = useDispatch();
-  console.log(newCharacter);
 
   useEffect(() => {
     dispatch(addSkills(addSkills(skills)));
-  }, [newCharacter]);
+  }, [skills, characters, dispatch]);
 
   const onAddCharacter = (obj) => {
     const char = { name: obj.name, skills: {} };
@@ -49,16 +48,8 @@ const NewChart = () => {
 
   const newCharSkills = Object.entries(newCharacter.skills);
 
-  console.log(Object.entries(newCharacter.skills)[0]);
-
   return (
     <form className={style.form}>
-      <p>{newCharacter.name}</p>
-      {Object.entries(newCharacter.skills).map((item) => (
-        <p key={item[0]}>
-          {item[0]}: {item[1]}
-        </p>
-      ))}
       <label className={style.label}>
         Имя персонажа
         <input
@@ -93,4 +84,4 @@ const NewChart = () => {
   );
 };
 
-export default NewChart;
+export default NewChar;
