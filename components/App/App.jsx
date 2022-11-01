@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { addCharacter, removeCharacter } from "../../store/charactersSlice";
+import { removeCharacter } from "../../store/charactersSlice";
+import { addSkillToArr } from "../../store/skillsSlice";
 import Character from "../Character/Character";
 import NewChar from "../NewChart/NewChar";
 
@@ -13,12 +14,23 @@ const App = () => {
   return (
     <div className={style.app}>
       <NewChar />
+      <button
+        className="button"
+        onClick={() => dispatch(addSkillToArr(prompt()))}
+      >
+        Добавить новую характеристику персонажа
+      </button>
       <button className="button" onClick={() => dispatch(removeCharacter())}>
         Удалить последнего персонажа
       </button>
-      <ul className={style.list}>
+      <ul>
         {characters.map((item, index) => (
-          <Character key={item.id} name={item.name} index={index} />
+          <Character
+            key={item.id}
+            name={item.name}
+            skills={item.skills}
+            index={index}
+          />
         ))}
       </ul>
     </div>

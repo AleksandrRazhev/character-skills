@@ -4,11 +4,11 @@ const skillsSlice = createSlice({
   name: "skills",
   initialState: { skills: ["power", "dexterity", "intelligence"] },
   reducers: {
-    addSkill(state, action) {
+    addSkillToArr(state, action) {
       state.skills.push(action.payload);
     },
   },
 });
 
 export default skillsSlice.reducer;
-export const { addSkill } = skillsSlice.actions;
+export const { addSkillToArr } = skillsSlice.actions;
