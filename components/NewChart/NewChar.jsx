@@ -1,3 +1,4 @@
+// Check this file for errors and incorrect decisions
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -1,3 +1,4 @@
+// Check this file for errors and incorrect decisions
 import { Provider } from "react-redux";
 
 import { store } from "../store";

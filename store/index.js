@@ -1,3 +1,4 @@
+// Check this file for errors and incorrect decisions
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import charactersSlice from "./charactersSlice";
 import newCharacterSlice from "./newCharacterSlice";

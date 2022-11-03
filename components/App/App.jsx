@@ -1,4 +1,4 @@
-// Check this application for errors and incorrect decisions
+// Check this file for errors and incorrect decisions
 import { useDispatch, useSelector } from "react-redux";
 
 import { removeCharacter } from "../../store/charactersSlice";

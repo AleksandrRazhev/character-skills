@@ -1,3 +1,4 @@
+// Check this file for errors and incorrect decisions
 import { useDispatch } from "react-redux";
 import { removeCharacter } from "../../store/charactersSlice";
 

@@ -1,3 +1,4 @@
+// Check this file for errors and incorrect decisions
 import { createSlice } from "@reduxjs/toolkit";
 
 const newCharacterSlice = createSlice({
